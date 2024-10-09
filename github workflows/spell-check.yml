@@ -23,7 +23,7 @@ jobs:
             files: "*.tex"
             check_dot_files: false
             strict: true
-            incremental_file_only: 
+            incremental_files_only: 
 
 
 #job -> akcja, którą nazwiemy spellcheck
