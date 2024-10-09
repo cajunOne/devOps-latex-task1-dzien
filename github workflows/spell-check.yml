@@ -1,0 +1,61 @@
+name: Check spelling
+on:
+    pull_request:
+    pus:
+        branches:
+            - main
+
+jobs:
+  spellcheck:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Set up Git repository
+          uses: actions/checkout@v3 
+        - name: Install dictionaries
+          run: 
+            npm install @cspell/dict-pl_pl
+            npm install @cspell/dict-latex
+            npm install @cspell/dict-software-terms
+            npm install @cspell/dict-golang
+        - name: Run cspell
+          uses: streetsidesoftware/cspell-action@v2
+          with: 
+            files: "*.tex"
+            check_dot_files: false
+            strict: true
+            incremental_file_only: 
+
+
+#job -> akcja, którą nazwiemy spellcheck
+#runs-on włączany na runs-on: ubuntu-latest, na linuksie bo jest taniej, prościej
+#a nie na windopwsie bo inaczej było to strasznie zasobożerne
+#jądro systemu operacyjnego jest maleńkie, ,dlaczsego wersja latest -> bo to wersja najnowsza i najlepiej, 
+#steps (z czego składa się nasz job/akcja), - name: Set up Git repository potrzebujemy go aby wykonać operacje na kodzie
+#uses też dotyczy pierwszego kroku bo nie ma drugiego myślnika
+#actions/checkout@v3 -> oznacza akcje githuba (zgodnie z dokumentacją) v3 czuli wersja numer 3
+#- name: Install dictionaries
+#run: o nazwie narzędzie cSpell -> sprawdza jakość generowanego tekstu, można dodać różne słowniki (patrz dokumentacja) np. python...
+#npm install @cspell/dict-pl_pl (polski słownik)
+#/dict-latex -> słownik w latechu
+#dict-software-terms słownik fachowe słownitkcop
+# - name: Run cspell -> uruchamia cspell
+#cspell-action@v2 wersja numer 2.
+# with: 
+#            files:
+#szukamy plik z roszczerzeniem tex "*.tex" -> dotyczy wszystkich plików z tex
+#dlaczego powstał latech?
+#potrzebowaliśmy sposobu na generowanie dokumentu, który byłby czytelny przez drukarkę,
+#ale nie był user-friendly i wymyślono systemu czuteln yh przez drukarki
+#można byłob skompilować dokument, który można było wydrukować
+#check_dot_files:  -> dot -> pliki ukryte, dot-files poprzedzone kropką, 
+#firmy często tworzą dokumentację bezpośrednio w kodzie
+#strict -> traktuje każdy błąd ortograficzny do sprwadzenia , przełącznik -> czy chcesz zgłaszać każdy błąd (obecnie słowniki sa lepsze więc wybierz true)
+#incremental_file_only -> specjalny przełącznik, który sprawdza tylko te pliki, które się zminieły (tam gdzie się zmieniła wartość) -> ustaw true -> wtedy sprawdza tylko te zmienione rekordy
+
+
+              
+
+#
+
+
+
