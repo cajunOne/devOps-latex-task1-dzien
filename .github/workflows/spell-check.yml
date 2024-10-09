@@ -1,7 +1,7 @@
 name: Check spelling
 on:
     pull_request:
-    pus:
+    push:
         branches:
             - main
 
